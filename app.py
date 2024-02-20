@@ -88,6 +88,8 @@ def get_episode():
 
     return {"episode": episode}
 
+if __name__ == "__main__":
+    app.run(debug=True)
 
 # @app.route("/location/<id>")
 # def get_location_id(id):
