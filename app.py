@@ -46,10 +46,10 @@ def get_list_characters():
     return {"characters": characters}
 
 
-@app.route("/locations")
+@app.route("/locations/")
 def get_location():
 
-    url = "https://rickandmortyapi.com/api/location"
+    url = "https://rickandmortyapi.com/api/location" 
     response = urllib.request.urlopen(url)
     data = response.read()
     dict = json.loads(data)
@@ -89,4 +89,13 @@ def get_episode():
     return {"episode": episode}
 
 
+# @app.route("/location/<id>")
+# def get_location_id(id):
+    
+#     url = "https://rickandmortyapi.com/api/location" + id
+#     response = urllib.request.urlopen(url)
+#     data = response.read()
+#     dict = json.loads(data)
+
+#     return render_template("location_id.html", get_location_id=dict)
 
