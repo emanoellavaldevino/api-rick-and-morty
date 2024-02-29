@@ -64,8 +64,18 @@ def get_location():
         }
 
         location.append(locations)
+    
+    return render_template("location.html", locations=dict["results"])
 
-    return {"location": location}
+@app.route("/location/<id>")
+def get_location_id(id):
+    
+    url = "https://rickandmortyapi.com/api/location/" + id
+    response = urllib.request.urlopen(url)
+    data = response.read()
+    dict = json.loads(data)
+
+    return render_template("location.html", get_location=dict)
 
 @app.route("/episodes")
 def get_episode():
@@ -86,18 +96,30 @@ def get_episode():
 
         episode.append(episodes)
 
-    return {"episode": episode}
+    return render_template("episodes.html", episodes=dict["results"])
+
+@app.route("/episode/<id>")
+def get_episode_id(id):
+    
+    url = "https://rickandmortyapi.com/api/episode/" + id
+    response = urllib.request.urlopen(url)
+    data = response.read()
+    dict = json.loads(data)
+
+    episodes_id = []
+
+    for episode_id in dict["results"]:
+        episodes_id = {
+            "name": episodes_id["name"],
+            "air_date": episodes_id["air_date"],
+            "episode": episodes_id["episode"],
+            
+        }
+          
+        episodes_id.append(episode_id)
+
+    return {"episodes_id": episode_id}
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-# @app.route("/location/<id>")
-# def get_location_id(id):
-    
-#     url = "https://rickandmortyapi.com/api/location" + id
-#     response = urllib.request.urlopen(url)
-#     data = response.read()
-#     dict = json.loads(data)
-
-#     return render_template("location_id.html", get_location_id=dict)
 
