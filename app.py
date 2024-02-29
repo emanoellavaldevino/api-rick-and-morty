@@ -103,22 +103,20 @@ def get_episode_id(id):
     
     url = "https://rickandmortyapi.com/api/episode/" + id
     response = urllib.request.urlopen(url)
-    data = response.read()
-    dict = json.loads(data)
+    episodesId = response.read()
+    dicio = json.loads(episodesId)
 
-    episodes_id = []
+    episodesId = []
 
-    for episode_id in dict["results"]:
-        episodes_id = {
-            "name": episodes_id["name"],
-            "air_date": episodes_id["air_date"],
-            "episode": episodes_id["episode"],
-            
+    for episodeId in dicio["results"]:
+        episodeId = {
+            "name": episodeId["name"],
+            "air_date": episodeId["air_date"],
+            "episode": episodeId["episode"]
         }
-          
-        episodes_id.append(episode_id)
-
-    return {"episodes_id": episode_id}
+        episodesId.append(episodeId)
+    
+    return {"episodesId": episodesId}
 
 if __name__ == "__main__":
     app.run(debug=True)
